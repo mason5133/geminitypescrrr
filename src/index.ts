@@ -10,7 +10,6 @@ const port = process.env.PORT || 3000;
 const geminiApiKey = process.env.GEMINI_API_KEY;
 
 if (!geminiApiKey) {
-  console.error("GEMINI_API_KEY is not defined in the .env file");
   process.exit(1);
 }
 
@@ -30,7 +29,5 @@ app.post("/generate", (req: Request, res: Response) => {
   })();
 });
 
-app.listen(port, () => {
-  console.log(`Server is running on port ${port}`);
-});
+app.listen(port);
 
