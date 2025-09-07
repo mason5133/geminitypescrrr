@@ -23,7 +23,7 @@ app.post("/generate", (req: Request, res: Response) => {
       const { prompt } = req.body;
       const generatedText = await geminiService.generateText(prompt);
       res.json({ generatedText });
-    } catch (error) {
+    } catch (_error) {
       res.status(500).json({ error: "Failed to generate text" });
     }
   })();
