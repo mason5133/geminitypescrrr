@@ -18,12 +18,19 @@ const geminiService = new GeminiService(geminiApiKey);
 
 app.use(express.json());
 
-app.post("/generate", async (req: Request, res: Response) => {
-  const { prompt } = req.body;
-  const generatedText = await geminiService.generateText(prompt);
-  res.json({ generatedText });
+app.post("/generate", (req: Request, res: Response) => {
+  void (async () => {
+    try {
+      const { prompt } = req.body;
+      const generatedText = await geminiService.generateText(prompt);
+      res.json({ generatedText });
+    } catch (error) {
+      res.status(500).json({ error: "Failed to generate text" });
+    }
+  })();
 });
 
 app.listen(port, () => {
   console.log(`Server is running on port ${port}`);
 });
+
